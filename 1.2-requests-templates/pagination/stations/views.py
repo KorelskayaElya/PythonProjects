@@ -24,6 +24,6 @@ def bus_stations(request):
 
     context = {
          'bus_stations': page,
-          'page': number_page,
+          'page': page,
     }
     return render(request, 'stations/index.html', context)
