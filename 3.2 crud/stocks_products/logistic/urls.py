@@ -1,12 +1,11 @@
-from django.urls import path
+from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import *
+from .views import ProductViewSet, StockViewSet
 
 router = DefaultRouter()
 router.register('products', ProductViewSet)
 router.register('stocks', StockViewSet)
 
 urlpatterns = router.urls + [
-    path('api/v1/stocks/<int:pk>/', StockDeleteView.as_view(), name='stock-delete'),
-    path('api/v1/products/', ProductListView.as_view(), name='product-list'),
+    path('',include(router.urls)),
 ]
