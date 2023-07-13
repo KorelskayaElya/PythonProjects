@@ -30,7 +30,7 @@ class StockViewSet(ModelViewSet):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
     filter_backends = [StockFilterBackend, DjangoFilterBackend]
-    filter_fields = ['product']
+    filterset_fields = ['products']
     pagination_class = CustomPagination
 
 
