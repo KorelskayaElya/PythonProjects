@@ -4,6 +4,7 @@ from advertisements.filters import AdvertisementFilter
 from advertisements.models import Advertisement
 from advertisements.serializers import AdvertisementSerializer
 from rest_framework.exceptions import PermissionDenied
+from advertisements.permissions import IsOwnerOrReadOnly
 
 
 class AdvertisementViewSet(ModelViewSet):
@@ -20,6 +21,8 @@ class AdvertisementViewSet(ModelViewSet):
 
         if self.action in ["create", "update", "partial_update"]:
             permission_classes = [permissions.IsAuthenticated]
+        elif self.action in ["update", "partial_update", "destroy"]:
+            permission_classes = [IsOwnerOrReadOnly]
         else:
             permission_classes = []
 
