@@ -17,15 +17,10 @@ class AdvertisementViewSet(ModelViewSet):
     filterset_class = AdvertisementFilter
 
     def get_permissions(self):
-        """Получение прав для действий."""
-
-        if self.action in ["create", "update", "partial_update"]:
-            permission_classes = [permissions.IsAuthenticated]
-        elif self.action in ["update", "partial_update", "destroy"]:
-            permission_classes = [IsOwnerOrReadOnly]
+        if self.action in ["create", "update", "partial_update", "destroy"]:
+            permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
         else:
             permission_classes = []
-
         return [permission() for permission in permission_classes]
 
     def perform_destroy(self, instance):
